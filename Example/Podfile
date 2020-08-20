@@ -1,9 +1,13 @@
 use_frameworks!
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'Whiteboard-iOS-Demo_Example' do
   pod 'Whiteboard-iOS-Demo', :path => '../'
+  pod 'Masonry'
+  pod 'NETURLSchemeHandler'
+  pod 'SSZipArchive'
+  pod 'Whiteboard'
 
   target 'Whiteboard-iOS-Demo_Tests' do
     inherit! :search_paths
