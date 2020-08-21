@@ -8,6 +8,10 @@
 
 #import "NETCreatRoomViewController.h"
 #import <Masonry/Masonry.h>
+#import "NETWhiteRoomViewController.h"
+#import "NETWhiteNavigationController.h"
+
+#import "NETWhiteUtils.h"
 
 @interface NETCreatRoomViewController ()
 
@@ -63,7 +67,8 @@
     self.roomTextField.layer.borderWidth = 1.0f;
     self.roomTextField.layer.borderColor = [UIColor colorWithRed:(231)/255.0 green:(231)/255.0 blue:(231)/255.0 alpha:1.0].CGColor;
     self.roomTextField.layer.cornerRadius = 4.0f;
-    
+    [self.roomTextField addTarget:self action:@selector(textValueChanged) forControlEvents:UIControlEventEditingChanged];
+
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];//textField向内缩进用
     self.roomTextField.leftView = view;
     self.roomTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -81,13 +86,13 @@
     NSString *nicknamePlaceholder = @"请输入昵称";
     NSMutableAttributedString *nicknamePlaceholderString = [[NSMutableAttributedString alloc] initWithString:nicknamePlaceholder attributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:(188)/255.0 green:(189)/255.0 blue:(189)/255.0 alpha:1.0], NSFontAttributeName : [UIFont systemFontOfSize:16]}];
     self.nickTextField.attributedPlaceholder = nicknamePlaceholderString;
-
     
     //FIXME:临时
     self.nickTextField.layer.borderWidth = 1.0f;
     self.nickTextField.layer.borderColor = [UIColor colorWithRed:(231)/255.0 green:(231)/255.0 blue:(231)/255.0 alpha:1.0].CGColor;
     self.nickTextField.layer.cornerRadius = 4.0f;
-    
+    [self.nickTextField addTarget:self action:@selector(textValueChanged) forControlEvents:UIControlEventEditingChanged];
+
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];//textField向内缩进用
     self.nickTextField.leftView = leftView;
     self.nickTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -99,6 +104,7 @@
     [self.finishButton setBackgroundImage:[self getImageWithColor:[UIColor colorWithRed:(227)/255.0 green:(232)/255.0 blue:(236)/255.0 alpha:1.0]] forState:UIControlStateDisabled];
     [self.finishButton setTitle:self.title forState:UIControlStateNormal];
     self.finishButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [self.finishButton addTarget:self action:@selector(actionFinishButton:) forControlEvents:UIControlEventTouchUpInside];
     
     //FIXME:临时
     self.finishButton.layer.cornerRadius = 4.0f;
@@ -155,11 +161,30 @@
  - (void)actionFinishButton:(id)sender
  {
      if (self.type == NETCreatRoomViewTypeCreate) {
-         
+         NETWhiteRoomViewController *roomVC = [[NETWhiteRoomViewController alloc] init];
+         [self.navigationController pushViewController:roomVC animated:YES];
      } else {
-         
+         NETWhiteRoomViewController *roomVC = [[NETWhiteRoomViewController alloc] init];
+         roomVC.roomUuid = [NETWhiteUtils roomUuid];
+         [self.navigationController pushViewController:roomVC animated:YES];
      }
  }
+
+- (void)textValueChanged
+{
+    if (self.roomTextField.text.length && self.nickTextField.text.length) {
+        self.finishButton.enabled = YES;
+    } else {
+        self.finishButton.enabled = NO;
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NETWhiteNavigationController *nav = (NETWhiteNavigationController *)self.navigationController;
+    [nav setupOrientationLandscape:NO];
+}
 
 //FIXME: 临时，后续加入分类中
 - (UIImage*)getImageWithColor:(UIColor*)color

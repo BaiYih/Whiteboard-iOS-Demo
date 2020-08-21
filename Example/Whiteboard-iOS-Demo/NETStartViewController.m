@@ -9,11 +9,9 @@
 #import "NETStartViewController.h"
 #import <Masonry/Masonry.h>
 #import "NETCreatRoomViewController.h"
+#import "NETWhiteNavigationController.h"
 
-@interface NETStartViewController ()
-{
-    UIImageView *navBarHairlineImageView;
-}
+@interface NETStartViewController ()<UITextViewDelegate>
 
 @property (nonatomic, strong) UIImageView *logoView;
 @property (nonatomic, strong) UILabel *versionLabel;
@@ -21,7 +19,7 @@
 @property (nonatomic, strong) UIButton *createButton;
 @property (nonatomic, strong) UILabel *joinLabel;
 @property (nonatomic, strong) UILabel *createLabel;
-@property (nonatomic, strong) UILabel *serviceLabel;
+@property (nonatomic, strong) UITextView *serviceTextView;
 
 @end
 
@@ -35,17 +33,7 @@
 }
 
 - (void)setupView
-{
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation_bac"] forBarMetrics:UIBarMetricsDefault];
-    }
-    
-    navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
-    navBarHairlineImageView.hidden = YES;
-    
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-    
+{    
     self.logoView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.logoView.image = [UIImage imageNamed:@"start_lofo"];
     [self.view addSubview:self.logoView];
@@ -80,12 +68,15 @@
     self.createLabel.text = @"创建房间";
     [self.view addSubview:self.createLabel];
 
-    self.serviceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.serviceLabel.textAlignment = NSTextAlignmentCenter;
-    self.serviceLabel.numberOfLines = 2;
-    self.serviceLabel.font = [UIFont systemFontOfSize:12];
-    self.serviceLabel.text = @"使用产品即代表阅读并同意《软件许可及服务协议》\n和《隐私政策》";
-    [self.view addSubview:self.serviceLabel];
+    self.serviceTextView = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.serviceTextView.textAlignment = NSTextAlignmentCenter;
+    self.serviceTextView.font = [UIFont systemFontOfSize:12];
+    self.serviceTextView.textContainerInset = UIEdgeInsetsZero;
+    NSString *serviceStr = @"使用产品即代表阅读并同意《软件许可及服务协议》\n和《隐私政策》";
+    self.serviceTextView.attributedText = [self getContentLabelAttributedText:serviceStr];
+    self.serviceTextView.delegate = self;
+
+    [self.view addSubview:self.serviceTextView];
     
     CGFloat width = self.view.frame.size.width / 4;
     [self.joinButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -128,7 +119,7 @@
         make.height.equalTo(@(20));
     }];
     
-    [self.serviceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.serviceTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).offset(-32);
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(self.view.mas_width);
@@ -136,12 +127,12 @@
     }];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
-    line.backgroundColor = [UIColor colorWithRed:(231)/255.0 green:(231)/255.0 blue:(231)/255.0 alpha:1.0];
+    line.backgroundColor = [UIColor colorWithRed:(244)/255.0 green:(244)/255.0 blue:(244)/255.0 alpha:1.0];
     [self.view addSubview:line];
     
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.width.equalTo(@(0.5));
+        make.width.equalTo(@(1));
         make.top.equalTo(self.joinButton.mas_top);
         make.bottom.equalTo(self.joinLabel.mas_bottom);
     }];
@@ -152,20 +143,23 @@
     self.versionLabel.text = @"1.0.0";
 }
 
-- (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
-    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
-        return (UIImageView *)view;
-    }
+- (NSAttributedString *)getContentLabelAttributedText:(NSString *)text
+{
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0],NSForegroundColorAttributeName:[UIColor colorWithRed:(35)/255.0 green:(35)/255.0 blue:(36)/255.0 alpha:0.6]}];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:(37)/255.0 green:(121)/255.0 blue:(96)/255.0 alpha:1.0] range:NSMakeRange(12, 11)];
+     [attrStr addAttribute:NSLinkAttributeName value:@"service://" range:NSMakeRange(12, 11)];
 
-    for (UIView *subview in view.subviews) {
-        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
-        if (imageView) {
-            return imageView;
-        }
-    }
-    return nil;
+     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:(37)/255.0 green:(121)/255.0 blue:(96)/255.0 alpha:1.0] range:NSMakeRange(text.length - 6, 6)];
+     [attrStr addAttribute:NSLinkAttributeName value:@"privacy://" range:NSMakeRange(text.length - 6, 6)];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    paragraphStyle.paragraphSpacing = 3;
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, text.length)];
+    
+    return attrStr;
+
 }
-
 
 #pragma mark - click
 - (void)actionJoinButton:(id)sender
@@ -182,6 +176,32 @@
     [self.navigationController pushViewController:joinVC animated:YES];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    NETWhiteNavigationController *nav = (NETWhiteNavigationController *)self.navigationController;
+    [nav setupOrientationLandscape:NO];
+}
+
+#pragma mark - UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+{
+    if ([[URL scheme] isEqualToString:@"service"]) {
+        NSLog(@"~~~~~ service 跳转");
+        return NO;
+    }else if ([[URL scheme] isEqualToString:@"privacy"]) {
+        NSLog(@"~~~~~ privacy 跳转");
+
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    return NO;
+}
 
 
 @end
