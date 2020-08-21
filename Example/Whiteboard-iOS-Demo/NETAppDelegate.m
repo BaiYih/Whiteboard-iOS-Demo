@@ -8,6 +8,7 @@
 
 #import "NETAppDelegate.h"
 #import "NETStartViewController.h"
+#import "NETWhiteNavigationController.h"
 
 @implementation NETAppDelegate
 
@@ -15,7 +16,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     NETStartViewController *startVC = [[NETStartViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:startVC];
+    NETWhiteNavigationController *navController = [[NETWhiteNavigationController alloc] initWithRootViewController:startVC];
     self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
