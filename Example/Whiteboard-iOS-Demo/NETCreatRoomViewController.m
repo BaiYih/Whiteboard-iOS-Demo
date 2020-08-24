@@ -182,8 +182,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NETWhiteNavigationController *nav = (NETWhiteNavigationController *)self.navigationController;
-    [nav setupOrientationLandscape:NO];
 }
 
 //FIXME: 临时，后续加入分类中

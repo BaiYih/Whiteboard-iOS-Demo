@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2169DDF624F2A4C000745753 /* UIDevice+WhiteboardDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2169DDF524F2A4C000745753 /* UIDevice+WhiteboardDevice.m */; };
 		21BC115524EF6FA900A184C2 /* NETWhiteBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC115424EF6FA900A184C2 /* NETWhiteBaseViewController.m */; };
 		21BC115B24EF6FF700A184C2 /* NETWhiteRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC115A24EF6FF700A184C2 /* NETWhiteRoomViewController.m */; };
 		21BC115E24EF743300A184C2 /* NETWhiteNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC115D24EF743300A184C2 /* NETWhiteNavigationController.m */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2169DDF424F2A4C000745753 /* UIDevice+WhiteboardDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+WhiteboardDevice.h"; sourceTree = "<group>"; };
+		2169DDF524F2A4C000745753 /* UIDevice+WhiteboardDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+WhiteboardDevice.m"; sourceTree = "<group>"; };
 		21BC115324EF6FA900A184C2 /* NETWhiteBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NETWhiteBaseViewController.h; sourceTree = "<group>"; };
 		21BC115424EF6FA900A184C2 /* NETWhiteBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NETWhiteBaseViewController.m; sourceTree = "<group>"; };
 		21BC115924EF6FF700A184C2 /* NETWhiteRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NETWhiteRoomViewController.h; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 		21BC114E24EF66FB00A184C2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				2169DDF424F2A4C000745753 /* UIDevice+WhiteboardDevice.h */,
+				2169DDF524F2A4C000745753 /* UIDevice+WhiteboardDevice.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				21BE783424EE461300FDE5B1 /* NETStartViewController.m in Sources */,
 				21BC116124EFB6C500A184C2 /* NETRoomViewModel.m in Sources */,
 				21BE783824EE6FAB00FDE5B1 /* NETCreatRoomViewController.m in Sources */,
+				2169DDF624F2A4C000745753 /* UIDevice+WhiteboardDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

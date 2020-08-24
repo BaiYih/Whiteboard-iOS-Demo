@@ -12,11 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NETWhiteNavigationController : UINavigationController
 
-@property (nonatomic)UIInterfaceOrientation interfaceOrientation;
-@property (nonatomic)UIInterfaceOrientationMask interfaceOrientationMask;
-
-- (void)setupOrientationLandscape:(BOOL)landscape;
-
 @end
 
 NS_ASSUME_NONNULL_END

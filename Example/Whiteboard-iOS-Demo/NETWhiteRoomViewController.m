@@ -10,6 +10,8 @@
 #import <Masonry/Masonry.h>
 #import "NETWhiteNavigationController.h"
 #import "NETRoomViewModel.h"
+#import "NETAppDelegate.h"
+#import "UIDevice+WhiteboardDevice.h"
 
 @interface NETWhiteRoomViewController ()<WhiteRoomCallbackDelegate, WhiteCommonCallbackDelegate, UIPopoverPresentationControllerDelegate>
 
@@ -29,6 +31,10 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    NETAppDelegate * appDelegate = (NETAppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = YES;
+    [UIDevice setupOrientation:UIInterfaceOrientationLandscapeRight];
     
     /**********/
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -66,6 +72,10 @@
 
 - (void)actionFinishButton:(id)sender
 {
+    NETAppDelegate * appDelegate = (NETAppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = NO;
+    //切换到竖屏
+    [UIDevice setupOrientation:UIInterfaceOrientationPortrait];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -152,13 +162,6 @@
             [self presentViewController:alertVC animated:YES completion:nil];
         }
     }];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    NETWhiteNavigationController *nav = (NETWhiteNavigationController *)self.navigationController;
-    [nav setupOrientationLandscape:YES];
 }
 
 /*

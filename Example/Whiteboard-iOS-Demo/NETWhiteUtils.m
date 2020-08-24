@@ -8,11 +8,11 @@
 
 #import "NETWhiteUtils.h"
 
-#define WhiteSDKToken <#WhiteSDKToken#>
+#define WhiteSDKToken @""//<#WhiteSDKToken#>
 
-#define WhiteAppIdentifier <#WhiteAppIdentifier#>
+#define WhiteAppIdentifier @""//<#WhiteAppIdentifier#>
 
-#define  WhiteRoomUUID <#WhiteRoomUUID#>
+#define  WhiteRoomUUID @""//<#WhiteRoomUUID#>
 
 @implementation NETWhiteUtils
 

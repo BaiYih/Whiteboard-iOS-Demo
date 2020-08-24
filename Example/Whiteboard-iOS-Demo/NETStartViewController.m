@@ -180,9 +180,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    NETWhiteNavigationController *nav = (NETWhiteNavigationController *)self.navigationController;
-    [nav setupOrientationLandscape:NO];
 }
 
 #pragma mark - UITextViewDelegate
