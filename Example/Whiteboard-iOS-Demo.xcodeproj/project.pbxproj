@@ -305,6 +305,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = LiMing;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = TV5FZ648A2;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -565,7 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TV5FZ648A2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Whiteboard-iOS-Demo/Whiteboard-iOS-Demo-Prefix.pch";
 				INFOPLIST_FILE = "Whiteboard-iOS-Demo/Whiteboard-iOS-Demo-Info.plist";
@@ -583,7 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TV5FZ648A2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Whiteboard-iOS-Demo/Whiteboard-iOS-Demo-Prefix.pch";
 				INFOPLIST_FILE = "Whiteboard-iOS-Demo/Whiteboard-iOS-Demo-Info.plist";
